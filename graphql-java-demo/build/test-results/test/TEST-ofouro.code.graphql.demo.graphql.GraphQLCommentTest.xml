@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ofouro.code.graphql.demo.graphql.GraphQLCommentTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-03-27T05:54:05" hostname="MZ01-YANGJH.local" time="0.095">
+  <properties/>
+  <testcase name="findCommentsNull" classname="ofouro.code.graphql.demo.graphql.GraphQLCommentTest" time="0.019"/>
+  <testcase name="createAndFInd" classname="ofouro.code.graphql.demo.graphql.GraphQLCommentTest" time="0.039"/>
+  <testcase name="findCommentsWithPage" classname="ofouro.code.graphql.demo.graphql.GraphQLCommentTest" time="0.036"/>
+  <system-out><![CDATA[2020-03-27 14:54:05.686  INFO 27004 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ofouro.code.graphql.demo.graphql.GraphQLCommentTest], using SpringBootContextLoader
+2020-03-27 14:54:05.686  INFO 27004 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ofouro.code.graphql.demo.graphql.GraphQLCommentTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-03-27 14:54:05.686  INFO 27004 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ofouro.code.graphql.demo.graphql.GraphQLCommentTest]: GraphQLCommentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-03-27 14:54:05.687  INFO 27004 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ofouro.code.graphql.demo.Application for test class ofouro.code.graphql.demo.graphql.GraphQLCommentTest
+2020-03-27 14:54:05.688  INFO 27004 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2020-03-27 14:54:05.689  INFO 27004 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4d8dab17, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@25863445, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@688077f9, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1c1262be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3c67b738, org.springframework.test.context.transaction.TransactionalTestExecutionListener@28d788ed, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@43031db1, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4c0b80fd, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4dd42033, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@59505984, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2e5298a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@12f94d43]
+2020-03-27 14:54:05.699  WARN 27004 --- [o-auto-1-exec-8] graphql.GraphQL                          : Query failed to validate : 'query findComments {
+  comments {
+    pageInfo {
+      pageSize
+      pageNumber
+      totalPages
+      totalElements
+    }
+    content {
+      comment
+      id
+      author {
+        name
+      }
+      talk {
+        title
+      }
+    }
+  }
+}
+'
+2020-03-27 14:54:05.708  INFO 27004 --- [    Test worker] o.c.g.demo.graphql.GraphQLCommentTest    : Response: <200,{"errors":[{"message":"Validation error of type SubSelectionNotAllowed: Sub selection not allowed on leaf type null of field author @ 'comments/content/author'","locations":[{"line":12,"column":7}],"extensions":{"classification":"ValidationError"}}],"data":null},[Content-Type:"application/json;charset=UTF-8", Content-Length:"262", Date:"Fri, 27 Mar 2020 05:54:05 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+2020-03-27 14:54:05.720  INFO 27004 --- [    Test worker] o.c.g.demo.graphql.GraphQLBaseTest       : Response: <200,{"data":{"addTalk":{"id":"85","title":"Some talk","summary":"empty"}}},[Content-Type:"application/json;charset=UTF-8", Content-Length:"70", Date:"Fri, 27 Mar 2020 05:54:05 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+2020-03-27 14:54:05.738  INFO 27004 --- [    Test worker] o.c.g.demo.graphql.GraphQLBaseTest       : Response: <200,{"data":{"addComment":{"id":"86","comment":"test"}}},[Content-Type:"application/json;charset=UTF-8", Content-Length:"52", Date:"Fri, 27 Mar 2020 05:54:05 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+2020-03-27 14:54:05.747  INFO 27004 --- [    Test worker] o.c.g.demo.graphql.GraphQLCommentTest    : Response: <200,{"data":{"comment":{"id":"86","comment":"test"}}},[Content-Type:"application/json;charset=UTF-8", Content-Length:"49", Date:"Fri, 27 Mar 2020 05:54:05 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+2020-03-27 14:54:05.784  INFO 27004 --- [    Test worker] o.c.g.demo.graphql.GraphQLCommentTest    : Response: <200,{"data":{"comments":{"pageInfo":{"pageSize":20,"pageNumber":0,"totalPages":1,"totalElements":2},"content":[{"comment":"test","id":"86","author":"John Doe","talk":{"title":"Some talk"}},{"comment":"test","id":"43","author":"John Doe","talk":{"title":"Some talk"}}]}}},[Content-Type:"application/json;charset=UTF-8", Content-Length:"266", Date:"Fri, 27 Mar 2020 05:54:05 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

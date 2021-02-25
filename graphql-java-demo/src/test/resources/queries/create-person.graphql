@@ -1,0 +1,8 @@
+mutation CreatPerson($input: InputPerson!) {
+  addPerson(person: $input) {
+    id
+    name
+    blog
+    githubAccount
+  }
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Query.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">graphql-demo-service</a> &gt; <a href="index.source.html" class="el_package">ofouro.code.graphql.demo.resolvers</a> &gt; <span class="el_source">Query.java</span></div><h1>Query.java</h1><pre class="source lang-java linenums">package ofouro.code.graphql.demo.resolvers;
+
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import ofouro.code.graphql.demo.model.Comment;
+import ofouro.code.graphql.demo.model.Conference;
+import ofouro.code.graphql.demo.model.Person;
+import ofouro.code.graphql.demo.model.Talk;
+import ofouro.code.graphql.demo.service.CommentRepository;
+import ofouro.code.graphql.demo.service.ConferenceService;
+import ofouro.code.graphql.demo.service.PersonService;
+import ofouro.code.graphql.demo.service.TalkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
+
+@Component
+<span class="fc" id="L20">public class Query implements GraphQLQueryResolver {</span>
+
+
+    @Autowired
+    private TalkService talkService;
+
+    @Autowired
+    private ConferenceService conferenceService;
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    public List&lt;Person&gt; persons(final InputPerson filter) {
+<span class="fc" id="L36">        return personService.find(InputPerson.convert(filter));</span>
+    }
+
+    public Optional&lt;Person&gt; person(final Long id) {
+<span class="fc" id="L40">        return personService.findById(id);</span>
+    }
+
+    public List&lt;Talk&gt; talks(final InputTalk filter) {
+<span class="fc" id="L44">        return talkService.find(InputTalk.convert(filter));</span>
+    }
+
+    public Optional&lt;Talk&gt; talk(final Long id) {
+<span class="fc" id="L48">        return talkService.findById(id);</span>
+    }
+
+    public List&lt;Conference&gt; conferences(final InputConference filter) {
+<span class="fc" id="L52">        return conferenceService.find(InputConference.convert(filter));</span>
+    }
+
+    public Optional&lt;Conference&gt; conference(final Long id) {
+<span class="fc" id="L56">        return conferenceService.findById(id);</span>
+    }
+
+    public Optional&lt;Comment&gt; comment(final Long id) {
+<span class="fc" id="L60">        return commentRepository.findById(id);</span>
+    }
+
+    public CommentPageableResponse comments(final InputPage inputPage) {
+<span class="fc" id="L64">        Page&lt;Comment&gt; comments = commentRepository.findAll(InputPage.convert(inputPage));</span>
+<span class="fc" id="L65">        return new CommentPageableResponse(comments);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

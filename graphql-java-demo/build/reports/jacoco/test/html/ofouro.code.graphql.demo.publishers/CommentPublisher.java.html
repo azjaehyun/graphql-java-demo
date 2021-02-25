@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentPublisher.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">graphql-demo-service</a> &gt; <a href="index.source.html" class="el_package">ofouro.code.graphql.demo.publishers</a> &gt; <span class="el_source">CommentPublisher.java</span></div><h1>CommentPublisher.java</h1><pre class="source lang-java linenums">package ofouro.code.graphql.demo.publishers;
+
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.observables.ConnectableObservable;
+import lombok.extern.slf4j.Slf4j;
+import ofouro.code.graphql.demo.model.Comment;
+import ofouro.code.graphql.demo.service.TalkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+<span class="fc" id="L14">@Slf4j</span>
+@Component
+public class CommentPublisher {
+
+
+    @Autowired
+    private TalkService talkService;
+
+    private final Flowable&lt;Comment&gt; publisher;
+
+    private ObservableEmitter&lt;Comment&gt; emitter;
+
+<span class="fc" id="L26">    public CommentPublisher() {</span>
+<span class="fc" id="L27">        Observable&lt;Comment&gt; commentUpdateObservable = Observable.create(emitter -&gt; {</span>
+<span class="fc" id="L28">            this.emitter = emitter;</span>
+<span class="fc" id="L29">        });</span>
+
+<span class="fc" id="L31">        ConnectableObservable&lt;Comment&gt; connectableObservable = commentUpdateObservable.share().publish();</span>
+<span class="fc" id="L32">        connectableObservable.connect();</span>
+
+
+<span class="fc" id="L35">        publisher = connectableObservable.toFlowable(BackpressureStrategy.BUFFER);</span>
+<span class="fc" id="L36">    }</span>
+
+    public void publish(final Comment comment) {
+<span class="fc" id="L39">        emitter.onNext(comment);</span>
+<span class="fc" id="L40">    }</span>
+
+    public Flowable&lt;Comment&gt; getPublisher() {
+<span class="nc" id="L43">        return this.publisher;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
